@@ -10,6 +10,10 @@ Registration::Registration(QWidget *parent, QList<QString>* data)
 {
     ui->setupUi(this);
     this->data = data;
+
+    ui->background->lower(); //Decreases zIndex of this UI element
+
+    this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 }
 
 Registration::~Registration()
@@ -28,7 +32,7 @@ void Registration::on_pushButton_clicked()
 {
     QString hisUsername = this->ui->textEdit->toPlainText();
     QString hisPassword = this->ui->textEdit_2->toPlainText();
-
+    int roleIndex = this->ui->comboBox->currentIndex();
 
     if (hisUsername.isEmpty() || hisPassword.isEmpty())
     {
@@ -70,9 +74,16 @@ void Registration::on_pushButton_clicked()
         this->ui->pushButton->setText("Register");
         return;
     }
-    QString usernameAndPassword = hisUsername + " " + hisPassword + " " + "patient";
-    data->push_back(usernameAndPassword);
-    qDebug() << data->count();
 
+    QString role;
+    switch(roleIndex)
+    {
+    case 0: role = "patient";
+    case 1: role = "nurse";
+    case 2: role = "doctor";
+    }
+
+    QString usernameAndPassword = hisUsername + " " + hisPassword + " " + role;
+    data->push_back(usernameAndPassword);
 }
 

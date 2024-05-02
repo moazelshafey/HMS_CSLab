@@ -3,3 +3,4 @@ Yosuf 1234 admin
 Koussay 1234 admin
 somedude 1234 patient
 maybe 1234 patient
+somename 1234 doctor

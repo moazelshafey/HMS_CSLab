@@ -196,9 +196,15 @@
      <x>0</x>
      <y>0</y>
      <width>837</width>
-     <height>26</height>
+     <height>17</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuWelcome">
+    <property name="title">
+     <string>Welcome</string>
+    </property>
+   </widget>
+   <addaction name="menuWelcome"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
