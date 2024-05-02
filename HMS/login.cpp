@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
+#include "admin.h"
 
 
 logIn::logIn(QWidget *parent)
@@ -40,7 +41,7 @@ logIn::logIn(QWidget *parent)
 
 logIn::~logIn()
 {
-    QString filePath = "../HMS/Data/data.txt";
+    QString filePath = "./Data/data.txt";
     QFile file(filePath);
 
     file.open(QFile::WriteOnly);
@@ -62,6 +63,7 @@ void logIn::on_LoginButton_clicked()
     this->hide();
     loginInfo* login = new loginInfo(this ,data);
     login->show();
+
 }
 
 

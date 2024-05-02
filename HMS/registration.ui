@@ -156,6 +156,15 @@
     <string>Role</string>
    </property>
   </widget>
+  <zorder>background</zorder>
+  <zorder>label_2</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>label</zorder>
+  <zorder>textEdit_2</zorder>
+  <zorder>textEdit</zorder>
+  <zorder>pushButton_2</zorder>
+  <zorder>comboBox</zorder>
+  <zorder>label_4</zorder>
  </widget>
  <resources>
   <include location="Resources.qrc"/>

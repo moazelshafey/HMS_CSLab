@@ -2,6 +2,11 @@
 #include "ui_logininfo.h"
 #include "login.h"
 #include "registration.h"
+#include "admin.h"
+#include "nurse.h"
+#include "doctor.h"
+#include "user.h"
+
 #include <QTimer>
 
 loginInfo::loginInfo(QWidget *parent, QList<QString> data)
@@ -64,22 +69,30 @@ void loginInfo::on_pushButton_clicked()
     //Deals with role accordingly
     if (role == "admin")
     {
-
+        this->hide();
+        admin* adminWindow = new admin(this);
+        adminWindow->show();
     }
 
     if (role == "patient")
     {
-
+        this->hide();
+        user* userWindow = new user(this);
+        userWindow->show();
     }
 
     if (role == "doctor")
     {
-
+        this->hide();
+        doctor* doctorWindow = new doctor(this);
+        doctorWindow->show();
     }
 
     if (role == "nurse")
     {
-
+        this->hide();
+        nurse* nurseWindow = new nurse(this);
+        nurseWindow->show();
     }
 }
 

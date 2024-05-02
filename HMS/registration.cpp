@@ -3,6 +3,7 @@
 #include "login.h"
 #include <QTimer>
 #include <QFile>
+//#include "admin.h"
 
 Registration::Registration(QWidget *parent, QList<QString>* data)
     : QDialog(parent)
