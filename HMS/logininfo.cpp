@@ -84,7 +84,7 @@ void loginInfo::on_pushButton_clicked()
     if (role == "doctor")
     {
         this->hide();
-        doctor* doctorWindow = new doctor(this);
+        doctor* doctorWindow = new doctor(this, data);
         doctorWindow->show();
     }
 
