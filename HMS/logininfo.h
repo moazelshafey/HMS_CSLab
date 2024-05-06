@@ -14,12 +14,13 @@ class loginInfo : public QDialog
 {
     Q_OBJECT
 
-    QList<QString> data;
+    QList<QString>* data_ptr;
+    QList<QList<QString>>* recordData;
     int index;
 
 public:
 
-    explicit loginInfo(QWidget *parent, QList<QString> data);
+    explicit loginInfo(QWidget *parent, QList<QString>* data, QList<QList<QString>>* recordData);
     ~loginInfo();
 
 private slots:

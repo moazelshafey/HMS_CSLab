@@ -29,50 +29,27 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>0</y>
+     <x>20</x>
+     <y>20</y>
      <width>611</width>
      <height>441</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>5</number>
+   </property>
+   <property name="tabBarAutoHide">
+    <bool>false</bool>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
-     <string>Add Patient</string>
+     <string>Edit Patient Records</string>
     </attribute>
-    <widget class="QLineEdit" name="PatientName_lineedit">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>70</y>
-       <width>181</width>
-       <height>26</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="PatientName_label">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>70</y>
-       <width>131</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Patient Name:</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="patientID_label">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>120</y>
+       <x>10</x>
+       <y>20</y>
        <width>91</width>
        <height>20</height>
       </rect>
@@ -87,17 +64,17 @@
     <widget class="QLineEdit" name="PatientID_lineedit">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>120</y>
+       <x>150</x>
+       <y>20</y>
        <width>113</width>
        <height>26</height>
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="AddPatient_pushbutton">
+    <widget class="QPushButton" name="EditPatientRecord">
      <property name="geometry">
       <rect>
-       <x>430</x>
+       <x>370</x>
        <y>320</y>
        <width>111</width>
        <height>41</height>
@@ -144,15 +121,15 @@
       <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
      </property>
      <property name="text">
-      <string>Add Patient</string>
+      <string>Edit</string>
      </property>
     </widget>
     <widget class="QLabel" name="Diagnosis_label">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>160</y>
-       <width>91</width>
+       <x>10</x>
+       <y>70</y>
+       <width>141</width>
        <height>31</height>
       </rect>
      </property>
@@ -160,82 +137,30 @@
       <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
      </property>
      <property name="text">
-      <string>Diagnosis:</string>
+      <string>Diagnosis and Treatment:</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="Diagnosis_lineedit">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>160</y>
+       <x>150</x>
+       <y>70</y>
        <width>341</width>
-       <height>26</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="Treatment_label">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>200</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Treatment :</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="Treatment_lineedit">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>200</y>
-       <width>201</width>
-       <height>26</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="Prescription_label">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>240</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Prescription:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="Prescription_lineedit">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>240</y>
-       <width>191</width>
-       <height>101</height>
+       <height>201</height>
       </rect>
      </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
-     <string>Patient List</string>
+     <string>Patients List</string>
     </attribute>
     <widget class="QListWidget" name="PatientList">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>160</x>
        <y>40</y>
-       <width>471</width>
+       <width>261</width>
        <height>341</height>
       </rect>
      </property>
@@ -248,10 +173,10 @@
     <widget class="QTableWidget" name="PatientDetailsTable">
      <property name="geometry">
       <rect>
-       <x>15</x>
-       <y>60</y>
-       <width>581</width>
-       <height>321</height>
+       <x>0</x>
+       <y>10</y>
+       <width>600</width>
+       <height>400</height>
       </rect>
      </property>
     </widget>
@@ -260,6 +185,98 @@
     <attribute name="title">
      <string>Assigned Nurse</string>
     </attribute>
+   </widget>
+   <widget class="QWidget" name="tab_6">
+    <attribute name="title">
+     <string>Manage Appointments</string>
+    </attribute>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Appointment Number:</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="AppointmentNumber">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>20</y>
+       <width>104</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="AddAppointment">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>200</y>
+       <width>131</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CancelAppointment">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>30</y>
+       <width>131</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="AppointmentDate">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>190</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>190</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Appointment Date:</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_5">
+    <attribute name="title">
+     <string>Appointments</string>
+    </attribute>
+    <widget class="QListWidget" name="AppointmentsList">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>601</width>
+       <height>411</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QPushButton" name="pushButton">

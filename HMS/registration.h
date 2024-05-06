@@ -12,8 +12,10 @@ class Registration : public QDialog
 {
     Q_OBJECT
     QList<QString>* data;
+    QList<QList<QString>>* recordData;
+
 public:
-    explicit Registration(QWidget *parent, QList<QString>* data);
+    explicit Registration(QWidget *parent, QList<QString>* data, QList<QList<QString>>* recordsData);
     ~Registration();
 
 private slots:

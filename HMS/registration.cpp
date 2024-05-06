@@ -5,12 +5,13 @@
 #include <QFile>
 //#include "admin.h"
 
-Registration::Registration(QWidget *parent, QList<QString>* data)
+Registration::Registration(QWidget *parent, QList<QString>* data, QList<QList<QString>>* recordData )
     : QDialog(parent)
     , ui(new Ui::Registration)
 {
     ui->setupUi(this);
     this->data = data;
+    this->recordData = recordData;
 
     ui->background->lower(); //Decreases zIndex of this UI element
 
@@ -79,12 +80,42 @@ void Registration::on_pushButton_clicked()
     QString role;
     switch(roleIndex)
     {
-    case 0: role = "patient";
-    case 1: role = "nurse";
-    case 2: role = "doctor";
+    case 0:
+        role = "patient";
+        break;
+    case 1:
+        role = "nurse";
+        break;
+    case 2:
+        role = "doctor";
+        break;
     }
 
-    QString usernameAndPassword = hisUsername + " " + hisPassword + " " + role;
+    QString id = QString::number(data->count());
+
+    QString userNameAndID = hisUsername + " " + id;
+    QList<QString> record;
+
+    if (role == "patient")
+    {
+        record.push_back(userNameAndID);
+        record.push_back(QString::number(1));
+        record.push_back("No Diagnosis");
+    }
+    else
+    {
+        record.push_back(userNameAndID);
+        record.push_back(QString::number(0));
+    }
+
+    QString usernameAndPassword = hisUsername + " " + hisPassword + " " + role + " " + id;
     data->push_back(usernameAndPassword);
+    recordData->push_back(record);
+
+    this->ui->pushButton->setText("Sucessfully Registered");
+    QEventLoop loop;
+    QTimer::singleShot(1000, &loop, &QEventLoop::quit);
+    loop.exec();
+    this->ui->pushButton->setText("Done");
 }
 

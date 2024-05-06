@@ -21,8 +21,7 @@ user::~user()
 
 void user::on_pushButton_clicked()
 {
-    this->hide();
-    logIn* loginWindow = new logIn(this);
-    loginWindow->show();
+    static_cast<logIn*>(parent())->show();
+    delete this;
 }
 

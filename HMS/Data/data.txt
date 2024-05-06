@@ -1,7 +1,0 @@
-Moaz 1234 admin 2
-Yousef 1234 admin 1
-Koussay 1234 admin 3
-hussien 1234 patient 4
-hassan 1234 patient 5
-ahmed 1234 doctor 6
-nurse 1234 nurse 7

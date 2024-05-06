@@ -9,12 +9,13 @@
 
 #include <QTimer>
 
-loginInfo::loginInfo(QWidget *parent, QList<QString> data)
+loginInfo::loginInfo(QWidget *parent, QList<QString>* data, QList<QList<QString>>* recordsData)
     : QDialog(parent)
     , ui(new Ui::loginInfo)
 {
     ui->setupUi(this);
-    this->data = data;
+    this->data_ptr = data;
+    this->recordData = recordsData;
 
     ui->background->lower(); //Decreases zIndex of this UI element
 
@@ -24,7 +25,6 @@ loginInfo::loginInfo(QWidget *parent, QList<QString> data)
 
 loginInfo::~loginInfo()
 {
-    static_cast<logIn*>(parent())->show();
     delete ui;
 }
 
@@ -36,6 +36,8 @@ void loginInfo::on_pushButton_clicked()
     hisUsername = hisUsername.trimmed(); // Trims any spaces at the end
     hisPassword = hisPassword.trimmed(); // Trims any spaces at the end
     index = -1;
+
+    QList<QString> data = *data_ptr;
     for (int i = 0; i < data.count(); i++)
     {
         QString username, password;
@@ -60,45 +62,44 @@ void loginInfo::on_pushButton_clicked()
 
     QTextStream input(&data[index]);
 
-    QString role;
-    input >> role >> role >> role; // First 2 to ignore name and password;
+    QString ownID, role;
+    input >> role >> role >> role >> ownID; // First 2 to ignore name and password;
 
+    QWidget* parent = static_cast<QWidget*>(this->parent());
 
     //The username variable is hisUsername;
-
     //Deals with role accordingly
+
     if (role == "admin")
     {
-        this->hide();
-        admin* adminWindow = new admin(this);
+        admin* adminWindow = new admin(parent, data_ptr, recordData);
         adminWindow->show();
+        delete this;
     }
-
-    if (role == "patient")
+    else  if (role == "patient")
     {
-        this->hide();
-        user* userWindow = new user(this);
+        user* userWindow = new user(parent);
         userWindow->show();
+        delete this;
     }
-
-    if (role == "doctor")
+    else if (role == "doctor")
     {
-        this->hide();
-        doctor* doctorWindow = new doctor(this, data);
+        doctor* doctorWindow = new doctor(parent, data, recordData, ownID);
         doctorWindow->show();
+        delete this;
     }
-
-    if (role == "nurse")
+    else if (role == "nurse")
     {
-        this->hide();
-        nurse* nurseWindow = new nurse(this);
+        nurse* nurseWindow = new nurse(parent);
         nurseWindow->show();
+        delete this;
     }
 }
 
 
 void loginInfo::on_pushButton_2_clicked()
 {
+    static_cast<logIn*>(parent())->show();
     delete this;
 }
 

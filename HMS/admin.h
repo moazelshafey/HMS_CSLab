@@ -16,14 +16,25 @@ class admin : public QDialog
 {
     Q_OBJECT
 
+    QList<QString>* data_ptr;
+    QList<QList<QString>>* usersRecords_ptr;
+
 public:
-    explicit admin(QWidget *parent = nullptr);
+    explicit admin(QWidget *parent, QList<QString>* data, QList<QList<QString>>* recordData);
     ~admin();
 
 private slots:
     void on_pushButton_clicked();
 
+    void on_DeleteRecordButton_clicked();
+
 private:
+    void InitializeList();
+    void AddPatientRecord(QString id);
+    int Find(QString id);
+    QList<QString> Retrieve(QString id);
+    int index;
+
     Ui::admin *ui;
 };
 

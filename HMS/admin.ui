@@ -16,7 +16,7 @@
   <widget class="QTabWidget" name="hometab">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>0</x>
      <y>0</y>
      <width>771</width>
      <height>451</height>
@@ -32,30 +32,63 @@
     <enum>QTabWidget::North</enum>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>2</number>
    </property>
-   <widget class="QWidget" name="hometabname">
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Write here &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <attribute name="title">
-     <string>Home Page</string>
-    </attribute>
-   </widget>
-   <widget class="QWidget" name="tab_4">
-    <attribute name="title">
-     <string>Add Patient</string>
-    </attribute>
-   </widget>
    <widget class="QWidget" name="page3">
     <attribute name="title">
-     <string>Edit Patient</string>
+     <string>Delete Records</string>
     </attribute>
+    <widget class="QPushButton" name="DeleteRecordButton">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>80</y>
+       <width>80</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete Record</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="PatientIDToBeDeleted">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>40</y>
+       <width>104</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>20</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ID:</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QWidget" name="tab">
+   <widget class="QWidget" name="tab_6">
     <attribute name="title">
-     <string>Assign Doctor</string>
+     <string>Patients Details</string>
     </attribute>
+    <widget class="QTableWidget" name="PatientDetailsTable">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>721</width>
+       <height>351</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
@@ -64,8 +97,18 @@
    </widget>
    <widget class="QWidget" name="tab_3">
     <attribute name="title">
-     <string>Schedule</string>
+     <string>Users List</string>
     </attribute>
+    <widget class="QTableWidget" name="usersList">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>771</width>
+       <height>431</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QLabel" name="bglabel">
