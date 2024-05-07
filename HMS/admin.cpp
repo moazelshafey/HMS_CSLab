@@ -21,6 +21,7 @@ admin::admin(QWidget *parent, QList<QString>* Data, QList<QList<QString>>* recor
     ui->usersList->setColumnCount(3);
     ui->usersList->setHorizontalHeaderLabels(headerLabels);
 
+
     InitializeList();
 }
 
@@ -166,3 +167,23 @@ void admin::AddPatientRecord(QString toBeAddedID)
     ui->PatientDetailsTable->setItem(index,2,new QTableWidgetItem(diagnosis));
     return;
 }
+
+void admin::on_pushButton_2_clicked(){
+
+};
+void admin::on_Assign_clicked()
+{
+    QString doctorname = this->ui->DoctorName->text();
+    QString nursename = this->ui->NurseName->text();
+    //nurses.push_back(std::make_pair(doctorname,nursename));
+     QFile file("C:\\Users\\kouss\\Desktop\\Hospital Management System\\HMS_CSLab\\HMS\\Data\\nursesData.txt");
+    if (file.open(QIODevice::ReadWrite | QIODevice::Append))
+    {
+         QTextStream stream(&file);
+        stream << doctorname << " "<<nursename<<"\n";
+        qDebug()<<"Write done";
+
+    }
+
+}
+

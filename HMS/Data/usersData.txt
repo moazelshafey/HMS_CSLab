@@ -3,3 +3,7 @@ ahmed 4
 13 No Reservee
 15 No Reservee
 16 No Reservee
+doctor 4
+0
+nurse 5
+0

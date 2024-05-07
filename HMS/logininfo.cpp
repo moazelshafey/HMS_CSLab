@@ -100,6 +100,6 @@ void loginInfo::on_pushButton_clicked()
 void loginInfo::on_pushButton_2_clicked()
 {
     static_cast<logIn*>(parent())->show();
-    delete this;
+    delete(this);
 }
 

@@ -25,3 +25,35 @@ void user::on_pushButton_clicked()
     delete this;
 }
 
+
+void user::on_addappointementbutton_clicked()
+{
+    QDate date= ui->dateTimeEdit->date();
+    QString dateString = date.toString();
+    QString patientname = ui->patientname->text();
+
+}
+
+
+void user::on_resechedulebuttom_clicked()
+{
+    QDate date= ui->dateTimeEdit->date();
+    QString dateString = date.toString();
+    QString patientname = ui->patientname2->text();
+
+}
+
+
+void user::on_cancelappointementbutton_clicked()
+{
+     QString patientname = ui->patientname3->text();
+
+}
+
+
+void user::on_showrecord_clicked()
+{
+    QString patientname = ui->patientname4->text();
+
+}
+
