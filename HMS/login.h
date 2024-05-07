@@ -16,8 +16,6 @@ class logIn : public QMainWindow
 {
     Q_OBJECT
 
-    QList<QString> data;
-    QList<QList<QString>> usersRecords;
     QString loginInfoPath;
     QString userRecordsPath;
 
@@ -30,6 +28,9 @@ class logIn : public QMainWindow
      * FIRST RECORD AND AFTER for NURSE is their assigned patients.
     */
 public:
+
+    QList<QString> data;
+    QList<QList<QString>> usersRecords;
 
     logIn(QWidget *parent = nullptr);
     ~logIn();

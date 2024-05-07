@@ -1,9 +1,6 @@
-ahmed 4
-3
-13 No Reservee
-15 No Reservee
-16 No Reservee
-doctor 4
+ahmed 3
 0
-nurse 5
-0
+patient 4
+1
+No Diagnosis
+

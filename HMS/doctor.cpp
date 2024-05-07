@@ -58,9 +58,10 @@ void doctor::InitializeList()
 
     for (int i = 0; i < recordNumber; i++)
     {
-        int recordIndex = i + 2;
-        QString record = (*usersRecords_ptr)[index].value(recordIndex);
-        ui->AppointmentsList->addItem(record);
+        int recordIndex = i * 2 + 2;
+        QString reservee = (*usersRecords_ptr)[index].value(recordIndex);
+        QString date = (*usersRecords_ptr)[index].value(recordIndex + 1);
+        ui->AppointmentsList->addItem(date + " " + reservee);
     }
 }
 
@@ -106,7 +107,6 @@ int doctor::Find(QString toBeFoundID)
     }
 }
 
-
 void doctor::AddPatientRecord(QString toBeAddedID)
 {
     QList<QString> userRecords = Retrieve(toBeAddedID);
@@ -122,7 +122,6 @@ void doctor::AddPatientRecord(QString toBeAddedID)
     ui->PatientDetailsTable->setItem(index,0,new QTableWidgetItem(name));
     ui->PatientDetailsTable->setItem(index,1,new QTableWidgetItem(id));
     ui->PatientDetailsTable->setItem(index,2,new QTableWidgetItem(diagnosis));
-    return;
 }
 
 void doctor::on_EditPatientRecord_clicked()
@@ -170,8 +169,10 @@ void doctor::on_CancelAppointment_clicked()
         this->ui->CancelAppointment->setText("Cancel");
         return;
     }
+
     int ownIndex = Find(ownID);
-    (*usersRecords_ptr)[ownIndex].remove(AppointmentIndex + 2);
+    (*usersRecords_ptr)[ownIndex].remove((AppointmentIndex - 1) * 2 + 2);
+    (*usersRecords_ptr)[ownIndex].remove((AppointmentIndex - 1) * 2 + 2);
     QListWidgetItem *itemToRemove = ui->AppointmentsList->takeItem(AppointmentIndex - 1);
     (*usersRecords_ptr)[ownIndex][1] = QString::number((*usersRecords_ptr)[ownIndex].value(1).toInt() - 1);
     delete itemToRemove;
@@ -180,18 +181,14 @@ void doctor::on_CancelAppointment_clicked()
 void doctor::on_AddAppointment_clicked()
 {
     int ownIndex = Find(ownID);
-    QString appointment = ui->AppointmentDate->toPlainText() + " " + "No Reservee";
+    QString appointmentDate = ui->appointmentDate->dateTime().toString();
     int recordNumber = (*usersRecords_ptr)[ownIndex].value(1).toInt();
     for (int i = 0; i < recordNumber; i++)
     {
-        int recordIndex = i + 2;
-        QString record = (*usersRecords_ptr)[ownIndex].value(recordIndex);
+        int recordIndex = i * 2 + 2;
+        QString date = (*usersRecords_ptr)[ownIndex].value(recordIndex);
 
-        QTextStream recordStream(&record);
-        QString date;
-        recordStream >> date;
-
-        if (date == ui->AppointmentDate->toPlainText())
+        if (date == appointmentDate)
         {
             this->ui->AddAppointment->setText("Appointment at this time already exists");
             QEventLoop loop;
@@ -202,7 +199,8 @@ void doctor::on_AddAppointment_clicked()
         }
     }
 
-    (*usersRecords_ptr)[ownIndex].push_back(appointment);
-    ui->AppointmentsList->addItem(appointment);
+    (*usersRecords_ptr)[ownIndex].push_back(appointmentDate);
+    (*usersRecords_ptr)[ownIndex].push_back("No Reservee");
+    ui->AppointmentsList->addItem("No Reservee " + appointmentDate);
     (*usersRecords_ptr)[ownIndex][1] = QString::number((*usersRecords_ptr)[ownIndex].value(1).toInt() + 1);
 }

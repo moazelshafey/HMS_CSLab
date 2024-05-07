@@ -17,8 +17,9 @@ logIn::logIn(QWidget *parent)
     QPixmap b(":/Images/Login2.png");
     b = b.scaled(ui->BackgroundLabel->size());
     ui->BackgroundLabel->setPixmap(b);
-    loginInfoPath = "C:\\Users\\kouss\\Desktop\\Hospital Management System\\HMS_CSLab\\HMS\\Data\\loginData.txt";
-    userRecordsPath = "C:\\Users\\kouss\\Desktop\\Hospital Management System\\HMS_CSLab\\HMS\\Data\\usersData.txt";
+
+    loginInfoPath = "C:/AUC/CS-Lab/HMS/Data/loginData.txt";
+    userRecordsPath = "C:/AUC/CS-Lab/HMS/Data/usersData.txt";
 
     ExtractData();
 }
@@ -65,8 +66,10 @@ void logIn::ExtractData()
         userInfoAndRecords.push_back(QString::number(recordsNumber));
         for (int i = 0; i < recordsNumber; i++)
         {
-            QString record = recordsStream.readLine();
-            userInfoAndRecords.push_back(record);
+            QString date = recordsStream.readLine();
+            QString reservee = recordsStream.readLine();
+            userInfoAndRecords.push_back(date);
+            userInfoAndRecords.push_back(reservee);
         }
         usersRecords.push_back(userInfoAndRecords);
     }
