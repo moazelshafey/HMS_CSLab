@@ -5,7 +5,7 @@
 #include <QFile>
 //#include "admin.h"
 
-Registration::Registration(QWidget *parent, QList<QString>* data, QList<QList<QString>>* recordData )
+Registration::Registration(QWidget *parent, QList<QString>* data, QList<QList<QString>>* recordData)
     : QDialog(parent)
     , ui(new Ui::Registration)
 {

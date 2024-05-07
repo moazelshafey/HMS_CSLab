@@ -45,7 +45,7 @@ void admin::on_DeleteRecordButton_clicked()
         QModelIndex index = model->index(i,1);
         QVariant data = model->data(index, Qt::DisplayRole);
 
-        if (id.trimmed() == data.toString().trimmed())
+        if (id == data.toString())
         {
             model->removeRow(i);
             break;
@@ -184,6 +184,5 @@ void admin::on_Assign_clicked()
         qDebug()<<"Write done";
 
     }
-
 }
 

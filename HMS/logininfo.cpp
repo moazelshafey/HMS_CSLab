@@ -62,11 +62,12 @@ void loginInfo::on_pushButton_clicked()
 
     QTextStream input(&data[index]);
 
-    QString ownID, role;
-    input >> role >> role >> role >> ownID; // First 2 to ignore name and password;
+    QString ownID, role, name;
+    input >> name >> role >> role >> ownID; // First 2 to ignore name and password;
 
     QWidget* parent = static_cast<QWidget*>(this->parent());
 
+    qDebug() << name;
     //The username variable is hisUsername;
     //Deals with role accordingly
 
@@ -78,7 +79,7 @@ void loginInfo::on_pushButton_clicked()
     }
     else  if (role == "patient")
     {
-        user* userWindow = new user(parent);
+        user* userWindow = new user(parent, data, recordData, ownID, name);
         userWindow->show();
         delete this;
     }
