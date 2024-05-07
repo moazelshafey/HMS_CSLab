@@ -90,7 +90,7 @@ void loginInfo::on_pushButton_clicked()
     }
     else if (role == "nurse")
     {
-        nurse* nurseWindow = new nurse(parent);
+        nurse* nurseWindow = new nurse(parent, recordData, data);
         nurseWindow->show();
         delete this;
     }

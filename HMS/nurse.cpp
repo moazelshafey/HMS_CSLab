@@ -1,7 +1,7 @@
 #include "nurse.h"
 #include "ui_nurse.h"
 
-nurse::nurse(QWidget *parent)
+nurse::nurse(QWidget *parent, QList<QList<QString>>* usersRecords_ptr, QList<QString> data)
     : QDialog(parent)
     , ui(new Ui::nurse)
 {
@@ -9,7 +9,8 @@ nurse::nurse(QWidget *parent)
     QPixmap b1(":/Images/nurse.jpg");
     b1 = b1.scaled(ui->bglabel->size());
     ui->bglabel->setPixmap(b1);
-
+    this->usersRecords_ptr = usersRecords_ptr;
+    this->data = data;
     InitializeList();
 }
 
@@ -20,29 +21,15 @@ nurse::~nurse()
 
 void nurse::InitializeList()
 {
-    QList<QString> data = *data_ptr;
-    for (int i = 0; i < data.count(); i++)
-    {
-        QTextStream input(&data[i]);
-        QString name, id, role;
-        input >> name >> role >> role >> id;
-        qDebug() << role;
-        if (role == "admin") continue;
-        int rowIndex = ui->usersList->rowCount();
-        ui->patientslabel->insertRow(rowIndex);
-        ui->patientslabel->setItem(rowIndex,0,new QTableWidgetItem(name));
-        ui->patientslabel->setItem(rowIndex,1,new QTableWidgetItem(id));
-        ui->patientslabel->setItem(rowIndex,2,new QTableWidgetItem(role));
-    }
-
-    ui->PatientDetailsTable->setColumnCount(3);
-    ui->PatientDetailsTable->setColumnWidth(0, 150);
-    ui->PatientDetailsTable->setColumnWidth(1, 50);
-    ui->PatientDetailsTable->setColumnWidth(2, 300);
+    ui->assignedpatients->setColumnCount(3);
+    ui->assignedpatients->setColumnWidth(0, 150);
+    ui->assignedpatients->setColumnWidth(1, 50);
+    ui->assignedpatients->setColumnWidth(2, 300);
     QStringList headerLabels;
     headerLabels << "Name" << "ID" << "Diagnosis and Treatment";
-    ui->PatientDetailsTable->setEditTriggers(QTableWidget::NoEditTriggers);
-    ui->PatientDetailsTable->setHorizontalHeaderLabels(headerLabels);
+    ui->assignedpatients->setEditTriggers(QTableWidget::NoEditTriggers);
+    ui->assignedpatients->setHorizontalHeaderLabels(headerLabels);
+
 
     for (int i = 0; i < data.count(); i++)
     {
@@ -55,9 +42,63 @@ void nurse::InitializeList()
 
         AddPatientRecord(id);
     }
+
+    //qDebug() << ownID;
+
+}
+
+QList<QString> nurse::Retrieve(QString toBeFoundID)
+{
+    QList<QList<QString>> usersRecords = *usersRecords_ptr;
+    for (int i = 0; i < usersRecords.count(); i++)
+    {
+        QString userInfo = usersRecords[i][0];
+        QTextStream input(&userInfo);
+        QString id;
+        input >> id >> id;
+
+        if (id == toBeFoundID)
+        {
+            return (usersRecords[i]);
+        }
+    }
+}
+
+int nurse::Find(QString toBeFoundID)
+{
+    QList<QList<QString>> usersRecords = *usersRecords_ptr;
+    for (int i = 0; i < usersRecords.count(); i++)
+    {
+        QString userInfo = usersRecords[i][0];
+        QTextStream input(&userInfo);
+        QString id;
+        input >> id >> id;
+
+        if (id == toBeFoundID)
+        {
+            return i;
+        }
+    }
 }
 
 
+void nurse::AddPatientRecord(QString toBeAddedID)
+{
+    QList<QString> userRecords = Retrieve(toBeAddedID);
+    QTextStream userInfo (&userRecords[0]);
+    QString diagnosis = userRecords[2];
+
+    QString name, id;
+
+    userInfo >> name >> id;
+
+    int index = ui->assignedpatients->rowCount();
+    ui->assignedpatients->insertRow(index);
+    ui->assignedpatients->setItem(index,0,new QTableWidgetItem(name));
+    ui->assignedpatients->setItem(index,1,new QTableWidgetItem(id));
+    ui->assignedpatients->setItem(index,2,new QTableWidgetItem(diagnosis));
+    return;
+}
 void nurse::on_pushButton_clicked()
 {
     static_cast<logIn*>(parent())->show();

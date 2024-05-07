@@ -17,10 +17,14 @@ class nurse : public QDialog
     Q_OBJECT
 
 public:
-    explicit nurse(QWidget *parent = nullptr);
+    explicit nurse(QWidget *parent, QList<QList<QString>>* usersRecords_ptr, QList<QString> data);
     ~nurse();
-    QList<QString>* data_ptr;
+    QList<QString> data;
     QList<QList<QString>>* usersRecords_ptr;
+    QList<QString> Retrieve(QString toBeFoundID);
+    void InitializeList();
+    int Find(QString toBeFoundID);
+    void AddPatientRecord(QString toBeAddedID);
 private slots:
     void on_pushButton_clicked();
 
@@ -29,7 +33,7 @@ private slots:
 private:
     Ui::nurse *ui;
     QFile file;
-    void InitializeList();
+    QList<QList<QString>> usersRecordData;
 };
 
 #endif // NURSE_H
