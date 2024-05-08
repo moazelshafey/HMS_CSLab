@@ -8,7 +8,6 @@ user::user(QWidget *parent, QList<QString> data, QList<QList<QString>>* usersRec
 {
     ui->setupUi(this);
 
-    AppointmentReserved=false;
     QPixmap b1(":/Images/user.jpg");
     b1 = b1.scaled(ui->bglabel->size());
     ui->bglabel->setPixmap(b1);
@@ -26,9 +25,16 @@ user::user(QWidget *parent, QList<QString> data, QList<QList<QString>>* usersRec
     ui->appointments->setColumnWidth(2, 200);
     QStringList headerLabels;
     headerLabels << "Doctor"<< "Date" << "Available";
-    ui->appointments->setEditTriggers(QTableWidget::DoubleClicked);
+    ui->appointments->setEditTriggers(QTableWidget::NoEditTriggers);
     ui->appointments->setHorizontalHeaderLabels(headerLabels);
 
+    headerLabels.clear();
+    ui->reservedAppointments->setColumnCount(2);
+    headerLabels << "Doctor"<< "Date";
+    ui->reservedAppointments->setEditTriggers(QTableWidget::NoEditTriggers);
+    ui->reservedAppointments->setHorizontalHeaderLabels(headerLabels);
+    ui->reservedAppointments->setColumnWidth(0, 300);
+    ui->reservedAppointments->setColumnWidth(1, 300);
 
     for (int i = 0; i < data.count(); i++)
     {
@@ -55,6 +61,15 @@ user::user(QWidget *parent, QList<QString> data, QList<QList<QString>>* usersRec
             ui->appointments->setItem(rowIndex,1,new QTableWidgetItem(date));
             if (reservee == "No Reservee") ui->appointments->setItem(rowIndex,2,new QTableWidgetItem("Available"));
             else ui->appointments->setItem(rowIndex,2,new QTableWidgetItem("Unavailable"));
+
+            if (reservee == ownName)
+            {
+                qDebug() << "reserved";
+                rowIndex = ui->reservedAppointments->rowCount();
+                ui->reservedAppointments->insertRow(rowIndex);
+                ui->reservedAppointments->setItem(rowIndex,0,new QTableWidgetItem(name));
+                ui->reservedAppointments->setItem(rowIndex,1,new QTableWidgetItem(date));
+            }
         }
     }
 }
@@ -94,35 +109,54 @@ void user::on_appointments_cellClicked(int row, int column)
 
     int dataIndex = Find(name.toString());
     int recordNumber = (*usersRecord_ptr)[dataIndex].value(1).toInt();
+
+    bool AppointmentReserved = false;
+
+    QString reservee;
     for (int j = 0; j < recordNumber; j++)
     {
         int recordIndex = j * 2 + 2;
         QString date = (*usersRecord_ptr)[dataIndex][recordIndex];
         if (appointmentDate == date)
-
         {
-            if((*usersRecord_ptr)[dataIndex][recordIndex + 1]=="No Reservee")
-
+            reservee = (*usersRecord_ptr)[dataIndex][recordIndex + 1];
+            if((*usersRecord_ptr)[dataIndex][recordIndex + 1] == "No Reservee")
             {
                 (*usersRecord_ptr)[dataIndex][recordIndex + 1] = ownName;
                 AppointmentReserved=true;
             }
-            else
+            else if((*usersRecord_ptr)[dataIndex][recordIndex + 1] == ownName)
             {
-                (*usersRecord_ptr)[dataIndex][recordIndex + 1]="No Reservee";
-                AppointmentReserved= false;
+                (*usersRecord_ptr)[dataIndex][recordIndex + 1]= "No Reservee";
             }
-
             break;
         }
     }
 
     index = model->index(row, 2);
     if(AppointmentReserved)
-    {model->setData(index, "Unavailable");}
-    else
+    {
+        model->setData(index, "Unavailable");
+        int rowIndex = ui->reservedAppointments->rowCount();
+        ui->reservedAppointments->insertRow(rowIndex);
+        ui->reservedAppointments->setItem(rowIndex,0,new QTableWidgetItem(name.toString()));
+        ui->reservedAppointments->setItem(rowIndex,1,new QTableWidgetItem(appointmentDate.toString()));
+    }
+    else if (ownName == reservee)
     {
         model->setData(index, "Available");
+        model = static_cast<QStandardItemModel*>(ui->reservedAppointments->model());
+        for (int i = 0; i < ui->reservedAppointments->rowCount(); i++)
+        {
+            QModelIndex index = model->index(i,0);
+            QVariant data = model->data(index, Qt::DisplayRole);
+
+            if (name == data.toString())
+            {
+                model->removeRow(i);
+                break;
+            }
+        }
     }
 }
 

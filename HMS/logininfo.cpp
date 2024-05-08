@@ -48,7 +48,6 @@ void loginInfo::on_Login_Button_clicked()
         if (hisUsername == username && hisPassword == password)
         {
             index = i;
-            qDebug() << "found";
         }
     }
 
@@ -69,7 +68,6 @@ void loginInfo::on_Login_Button_clicked()
 
     QWidget* parent = static_cast<QWidget*>(this->parent());
 
-    qDebug() << name;
     //The username variable is hisUsername;
     //Deals with role accordingly
 

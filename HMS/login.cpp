@@ -18,8 +18,8 @@ logIn::logIn(QWidget *parent)
     b = b.scaled(ui->BackgroundLabel->size());
     ui->BackgroundLabel->setPixmap(b);
 
-    loginInfoPath = "D:\\CS2 LAB\\HMS\\HMS_CSLab\\HMS\\Data\\loginData.txt";
-    userRecordsPath = "D:\\CS2 LAB\\HMS\\HMS_CSLab\\HMS\\Data\\usersData.txt";
+    loginInfoPath = "C:/AUC/CS-Lab/HMS/Data/loginData.txt";
+    userRecordsPath = "C:/AUC/CS-Lab/HMS/Data/usersData.txt";
 
     ExtractData();
 }
@@ -117,7 +117,6 @@ void logIn::on_LoginButton_clicked()
     loginInfo* login = new loginInfo(this, &data, &usersRecords);
     login->show();
 }
-
 
 void logIn::on_SignUpButton_clicked()
 {
