@@ -53,6 +53,21 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string>Reserved Appointments</string>
+    </attribute>
+    <widget class="QTableWidget" name="ownAppointments">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>721</width>
+       <height>411</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
    <widget class="QWidget" name="tab_4">
     <attribute name="title">
      <string>My Medical Record</string>

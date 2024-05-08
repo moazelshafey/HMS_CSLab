@@ -6,7 +6,7 @@
 #include "login.h"
 #include <QFile>
 #include <QTextStream>
-#include <QDateTimeEdit>
+#include <QTableWidget>
 namespace Ui {
 class user;
 }
@@ -16,14 +16,15 @@ class user : public QDialog
     Q_OBJECT
 
 public:
+
     explicit user(QWidget *parent, QList<QString> data, QList<QList<QString>>* usersRecordData, QString ownID, QString ownName);
     ~user();
-
-
 private slots:
     void on_pushButton_clicked();
 
-    void on_appointments_cellClicked(int row, int column);
+    void on_ownAppointments_itemClicked(QTableWidgetItem *item);
+
+    void on_appointments_itemClicked(QTableWidgetItem *item);
 
 private:
 

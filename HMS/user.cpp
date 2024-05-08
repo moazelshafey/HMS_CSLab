@@ -26,9 +26,17 @@ user::user(QWidget *parent, QList<QString> data, QList<QList<QString>>* usersRec
     ui->appointments->setColumnWidth(2, 200);
     QStringList headerLabels;
     headerLabels << "Doctor"<< "Date" << "Available";
-    ui->appointments->setEditTriggers(QTableWidget::DoubleClicked);
+    ui->appointments->setEditTriggers(QTableWidget::NoEditTriggers);
     ui->appointments->setHorizontalHeaderLabels(headerLabels);
 
+
+    ui->ownAppointments->setColumnCount(2);
+    ui->ownAppointments->setColumnWidth(0, 300);
+    ui->ownAppointments->setColumnWidth(1, 300);
+    headerLabels.clear();
+    headerLabels << "Doctor"<< "Date";
+    ui->ownAppointments->setEditTriggers(QTableWidget::NoEditTriggers);
+    ui->ownAppointments->setHorizontalHeaderLabels(headerLabels);
 
     for (int i = 0; i < data.count(); i++)
     {
@@ -87,10 +95,25 @@ void user::on_pushButton_clicked()
     delete this;
 }
 
-
-void user::on_appointments_cellClicked(int row, int column)
+int user::Find(QString toBeFoundName)
 {
-    qDebug() << "clicked";
+    QList<QList<QString>> usersRecords = *usersRecord_ptr;
+    for (int i = 0; i < usersRecords.count(); i++)
+    {
+        QString userInfo = usersRecords[i][0];
+        QTextStream input(&userInfo);
+        QString name;
+        input >> name;
+        if (name == toBeFoundName)
+        {
+            return i;
+        }
+    }
+}
+
+void user::on_appointments_itemClicked(QTableWidgetItem *item)
+{
+    int row = item->row();
     QStandardItemModel* model = static_cast<QStandardItemModel*>(ui->appointments->model());
     QModelIndex index = model->index(row,0);
     QVariant name = model->data(index, Qt::DisplayRole);
@@ -112,20 +135,19 @@ void user::on_appointments_cellClicked(int row, int column)
 
     index = model->index(row, 2);
     model->setData(index, "Unavailable");
+
+    int patientIndex = Find(ownName);
+
+    int patientRecordNumber = usersRecord_ptr->at(patientIndex).value(1).toInt();
+
+    (*usersRecord_ptr)[patientRecordNumber].push_back(appointmentDate.toString());
+    (*usersRecord_ptr)[patientRecordNumber].push_back(name.toString());
 }
 
-int user::Find(QString toBeFoundName)
+
+void user::on_ownAppointments_itemClicked(QTableWidgetItem *item)
 {
-    QList<QList<QString>> usersRecords = *usersRecord_ptr;
-    for (int i = 0; i < usersRecords.count(); i++)
-    {
-        QString userInfo = usersRecords[i][0];
-        QTextStream input(&userInfo);
-        QString name;
-        input >> name;
-        if (name == toBeFoundName)
-        {
-            return i;
-        }
-    }
+
+
 }
+
