@@ -35,6 +35,7 @@ private:
     QList<QString> data;
     QString ownID;
     Ui::user *ui;
+    bool AppointmentReserved;
 };
 
 #endif // USER_H

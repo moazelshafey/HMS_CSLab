@@ -8,7 +8,7 @@ user::user(QWidget *parent, QList<QString> data, QList<QList<QString>>* usersRec
 {
     ui->setupUi(this);
 
-
+    AppointmentReserved=false;
     QPixmap b1(":/Images/user.jpg");
     b1 = b1.scaled(ui->bglabel->size());
     ui->bglabel->setPixmap(b1);
@@ -99,14 +99,31 @@ void user::on_appointments_cellClicked(int row, int column)
         int recordIndex = j * 2 + 2;
         QString date = (*usersRecord_ptr)[dataIndex][recordIndex];
         if (appointmentDate == date)
+
         {
-            (*usersRecord_ptr)[dataIndex][recordIndex + 1] = ownName;
+            if((*usersRecord_ptr)[dataIndex][recordIndex + 1]=="No Reservee")
+
+            {
+                (*usersRecord_ptr)[dataIndex][recordIndex + 1] = ownName;
+                AppointmentReserved=true;
+            }
+            else
+            {
+                (*usersRecord_ptr)[dataIndex][recordIndex + 1]="No Reservee";
+                AppointmentReserved= false;
+            }
+
             break;
         }
     }
 
     index = model->index(row, 2);
-    model->setData(index, "Unavailable");
+    if(AppointmentReserved)
+    {model->setData(index, "Unavailable");}
+    else
+    {
+        model->setData(index, "Available");
+    }
 }
 
 int user::Find(QString toBeFoundName)

@@ -8,6 +8,10 @@ doctor::doctor(QWidget *parent, QList<QString> data, QList<QList<QString>>* user
     , ui(new Ui::doctor)
 {
     this->data = data;
+    if(usersRecords== nullptr)
+    {
+        qDebug()<<"error";
+    }
     this->usersRecords_ptr = usersRecords;
     this->ownID = ownID;
 

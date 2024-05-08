@@ -36,7 +36,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -47,9 +47,25 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>721</width>
-       <height>411</height>
+       <width>701</width>
+       <height>341</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>300</y>
+       <width>881</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 700 14pt &quot;Times New Roman&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Click on the avilable/unavilable column to reserve/cancel appointment</string>
      </property>
     </widget>
    </widget>
