@@ -25,8 +25,9 @@ public:
 
 private slots:
 
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
+    void on_Login_Button_clicked();
+
+    void on_GoBack_Button_clicked();
 
 private:
     Ui::loginInfo *ui;

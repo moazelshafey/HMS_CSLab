@@ -22,13 +22,14 @@ public:
     ~doctor();
 
 private slots:
-    void on_pushButton_clicked();
 
     void on_EditPatientRecord_clicked();
 
     void on_CancelAppointment_clicked();
 
     void on_AddAppointment_clicked();
+
+    void on_ExitButton_clicked();
 
 private:
     Ui::doctor *ui;

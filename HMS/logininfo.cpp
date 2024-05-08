@@ -28,7 +28,9 @@ loginInfo::~loginInfo()
     delete ui;
 }
 
-void loginInfo::on_pushButton_clicked()
+
+
+void loginInfo::on_Login_Button_clicked()
 {
     QString hisUsername = this->ui->textEdit->toPlainText();
     QString hisPassword = this->ui->textEdit_2->toPlainText();
@@ -52,11 +54,11 @@ void loginInfo::on_pushButton_clicked()
 
     if (index == -1)
     {
-        this->ui->pushButton->setText("Invalid Details");
+        this->ui->Login_Button->setText("Invalid Details");
         QEventLoop loop;
         QTimer::singleShot(1000, &loop, &QEventLoop::quit);
         loop.exec();
-        this->ui->pushButton->setText("Login");
+        this->ui->Login_Button->setText("Login");
         return;
     }
 
@@ -98,7 +100,7 @@ void loginInfo::on_pushButton_clicked()
 }
 
 
-void loginInfo::on_pushButton_2_clicked()
+void loginInfo::on_GoBack_Button_clicked()
 {
     static_cast<logIn*>(parent())->show();
     delete(this);

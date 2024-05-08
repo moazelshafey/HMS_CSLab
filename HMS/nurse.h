@@ -26,9 +26,10 @@ public:
     int Find(QString toBeFoundID);
     void AddPatientRecord(QString toBeAddedID);
 private slots:
-    void on_pushButton_clicked();
 
     void on_getdoctorbutton_clicked();
+
+    void on_Exit_Button_clicked();
 
 private:
     Ui::nurse *ui;

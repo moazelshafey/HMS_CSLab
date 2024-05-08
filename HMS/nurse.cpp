@@ -99,17 +99,10 @@ void nurse::AddPatientRecord(QString toBeAddedID)
     ui->assignedpatients->setItem(index,2,new QTableWidgetItem(diagnosis));
     return;
 }
-void nurse::on_pushButton_clicked()
-{
-    static_cast<logIn*>(parent())->show();
-    delete this;
-
-}
-
 
 void nurse::on_getdoctorbutton_clicked()
 {
-    QFile file("C:\\Users\\kouss\\Desktop\\Hospital Management System\\HMS_CSLab\\HMS\\Data\\nursesData.txt");
+    QFile file("D:\\CS2 LAB\\HMS\\HMS_CSLab\\HMS\\Data\\nursesData.txt");
     QString nursename = this->ui->nursename->text().trimmed(); // Trimmed to remove any leading/trailing spaces
 
     // Convert nurse's name to QByteArray
@@ -133,5 +126,12 @@ void nurse::on_getdoctorbutton_clicked()
 
 
 
+}
+
+
+void nurse::on_Exit_Button_clicked()
+{
+    static_cast<logIn*>(parent())->show();
+    delete this;
 }
 

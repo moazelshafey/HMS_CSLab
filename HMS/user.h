@@ -21,17 +21,16 @@ public:
 
 
 private slots:
-    void on_pushButton_clicked();
 
     void on_appointments_cellClicked(int row, int column);
+
+    void on_Exit_Button_clicked();
 
 private:
 
     int Find(QString id);
     QList<QString> Retrieve(QString id);
-
     QString ownName;
-
     QList<QList<QString>>* usersRecord_ptr;
     QList<QString> data;
     QString ownID;

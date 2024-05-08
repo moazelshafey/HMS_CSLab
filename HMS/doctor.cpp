@@ -65,14 +65,6 @@ void doctor::InitializeList()
     }
 }
 
-
-
-
-void doctor::on_pushButton_clicked()
-{
-    delete this;
-}
-
 QList<QString> doctor::Retrieve(QString toBeFoundID)
 {
     QList<QList<QString>> usersRecords = *usersRecords_ptr;
@@ -204,3 +196,9 @@ void doctor::on_AddAppointment_clicked()
     ui->AppointmentsList->addItem("No Reservee " + appointmentDate);
     (*usersRecords_ptr)[ownIndex][1] = QString::number((*usersRecords_ptr)[ownIndex].value(1).toInt() + 1);
 }
+
+void doctor::on_ExitButton_clicked()
+{
+    delete this;
+}
+

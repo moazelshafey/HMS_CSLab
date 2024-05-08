@@ -30,11 +30,6 @@ admin::~admin()
     delete ui;
 }
 
-void admin::on_pushButton_clicked()
-{
-    static_cast<logIn*>(parent())->show();
-    delete this;
-}
 
 void admin::on_DeleteRecordButton_clicked()
 {
@@ -168,9 +163,6 @@ void admin::AddPatientRecord(QString toBeAddedID)
     return;
 }
 
-void admin::on_pushButton_2_clicked(){
-
-};
 void admin::on_Assign_clicked()
 {
     QString doctorname = this->ui->DoctorName->text();
@@ -184,5 +176,12 @@ void admin::on_Assign_clicked()
         qDebug()<<"Write done";
 
     }
+}
+
+
+void admin::on_Exit_Button_clicked()
+{
+    static_cast<logIn*>(parent())->show();
+    delete this;
 }
 

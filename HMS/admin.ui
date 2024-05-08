@@ -32,7 +32,7 @@
     <enum>QTabWidget::North</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page3">
     <attribute name="title">
@@ -183,7 +183,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="Exit_Button">
    <property name="geometry">
     <rect>
      <x>790</x>
@@ -685,7 +685,7 @@
   </widget>
   <zorder>bglabel</zorder>
   <zorder>hometab</zorder>
-  <zorder>pushButton</zorder>
+  <zorder>Exit_Button</zorder>
  </widget>
  <resources/>
  <connections/>

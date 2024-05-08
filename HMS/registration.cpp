@@ -24,13 +24,8 @@ Registration::~Registration()
     delete ui;
 }
 
-void Registration::on_pushButton_2_clicked()
-{
-    delete this;
-}
 
-
-void Registration::on_pushButton_clicked()
+void Registration::on_Register_Button_clicked()
 {
     QString hisUsername = this->ui->textEdit->toPlainText();
     QString hisPassword = this->ui->textEdit_2->toPlainText();
@@ -38,20 +33,20 @@ void Registration::on_pushButton_clicked()
 
     if (hisUsername.isEmpty() || hisPassword.isEmpty())
     {
-        this->ui->pushButton->setText("Please provide a username and a password");
+        this->ui->Register_Button->setText("Please provide a username and a password");
         QEventLoop loop;
         QTimer::singleShot(1000, &loop, &QEventLoop::quit);
         loop.exec();
-        this->ui->pushButton->setText("Register");
+        this->ui->Register_Button->setText("Register");
         return;
     }
     if (hisUsername.contains(" "))
     {
-        this->ui->pushButton->setText("No spaces allowed in username");
+        this->ui->Register_Button->setText("No spaces allowed in username");
         QEventLoop loop;
         QTimer::singleShot(1000, &loop, &QEventLoop::quit);
         loop.exec();
-        this->ui->pushButton->setText("Register");
+        this->ui->Register_Button->setText("Register");
         return;
     }
 
@@ -69,11 +64,11 @@ void Registration::on_pushButton_clicked()
     }
     if (isTaken)
     {
-        this->ui->pushButton->setText("Username already taken");
+        this->ui->Register_Button->setText("Username already taken");
         QEventLoop loop;
         QTimer::singleShot(1000, &loop, &QEventLoop::quit);
         loop.exec();
-        this->ui->pushButton->setText("Register");
+        this->ui->Register_Button->setText("Register");
         return;
     }
 
@@ -112,10 +107,16 @@ void Registration::on_pushButton_clicked()
     data->push_back(usernameAndPassword);
     recordData->push_back(record);
 
-    this->ui->pushButton->setText("Sucessfully Registered");
+    this->ui->Register_Button->setText("Sucessfully Registered");
     QEventLoop loop;
     QTimer::singleShot(1000, &loop, &QEventLoop::quit);
     loop.exec();
-    this->ui->pushButton->setText("Done");
+    this->ui->Register_Button->setText("Done");
+}
+
+
+void Registration::on_GoBack_Button_clicked()
+{
+    delete this;
 }
 

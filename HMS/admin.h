@@ -28,13 +28,12 @@ public:
     //std::vector<QPair<QString,QString>> nurses;
 
 private slots:
-    void on_pushButton_clicked();
 
     void on_DeleteRecordButton_clicked();
 
-    void on_pushButton_2_clicked();
-
     void on_Assign_clicked();
+
+    void on_Exit_Button_clicked();
 
 private:
     void InitializeList();

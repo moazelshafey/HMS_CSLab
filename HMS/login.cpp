@@ -18,8 +18,8 @@ logIn::logIn(QWidget *parent)
     b = b.scaled(ui->BackgroundLabel->size());
     ui->BackgroundLabel->setPixmap(b);
 
-    loginInfoPath = "C:/AUC/CS-Lab/HMS/Data/loginData.txt";
-    userRecordsPath = "C:/AUC/CS-Lab/HMS/Data/usersData.txt";
+    loginInfoPath = "D:\\CS2 LAB\\HMS\\HMS_CSLab\\HMS\\Data\\loginData.txt";
+    userRecordsPath = "D:\\CS2 LAB\\HMS\\HMS_CSLab\\HMS\\Data\\usersData.txt";
 
     ExtractData();
 }

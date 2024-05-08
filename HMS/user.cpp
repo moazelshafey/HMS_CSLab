@@ -81,11 +81,6 @@ user::~user()
     delete ui;
 }
 
-void user::on_pushButton_clicked()
-{
-    static_cast<logIn*>(parent())->show();
-    delete this;
-}
 
 
 void user::on_appointments_cellClicked(int row, int column)
@@ -129,3 +124,10 @@ int user::Find(QString toBeFoundName)
         }
     }
 }
+
+void user::on_Exit_Button_clicked()
+{
+    static_cast<logIn*>(parent())->show();
+    delete this;
+}
+
