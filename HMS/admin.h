@@ -40,7 +40,6 @@ private:
     void AddPatientRecord(QString id);
     int Find(QString id);
     QList<QString> Retrieve(QString id);
-    int index;
 
     Ui::admin *ui;
 };

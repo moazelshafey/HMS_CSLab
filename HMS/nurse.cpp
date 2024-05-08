@@ -102,7 +102,7 @@ void nurse::AddPatientRecord(QString toBeAddedID)
 
 void nurse::on_getdoctorbutton_clicked()
 {
-    QFile file("D:\\CS2 LAB\\HMS\\HMS_CSLab\\HMS\\Data\\nursesData.txt");
+    QFile file("C:\\AUC\\CS-Lab\\HMS\\Data\\nursesData.txt");
     QString nursename = this->ui->nursename->text().trimmed(); // Trimmed to remove any leading/trailing spaces
 
     // Convert nurse's name to QByteArray
@@ -114,7 +114,7 @@ void nurse::on_getdoctorbutton_clicked()
 
 
             if (line.contains(ba)) {
-                ui->doctoroutput->setText(QString("The Nurse and the Assigned Doctor : ")+ QString(line));
+                ui->doctoroutput->setText(QString("The Assigned Doctor and Nurse: ")+ QString(line));
                 qDebug() << "read output - " << line;
                 break; // If you only want to display the first match, you can break here
             }

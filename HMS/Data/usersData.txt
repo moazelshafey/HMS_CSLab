@@ -1,6 +1,6 @@
 ahmed 3
-0
-patient 4
 1
-No Diagnosis
 
+
+nurse 4
+0

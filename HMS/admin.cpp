@@ -12,7 +12,6 @@ admin::admin(QWidget *parent, QList<QString>* Data, QList<QList<QString>>* recor
     QPixmap b1(":/Images/admin.jpg");
     b1 = b1.scaled(ui->bglabel->size());
     ui->bglabel->setPixmap(b1);
-    index = 0;
     this->data_ptr = Data;
     this->usersRecords_ptr = recordData;
 
@@ -88,6 +87,7 @@ void admin::InitializeList()
         ui->usersList->setItem(rowIndex,2,new QTableWidgetItem(role));
     }
 
+    qDebug() << "first";
     ui->PatientDetailsTable->setColumnCount(3);
     ui->PatientDetailsTable->setColumnWidth(0, 150);
     ui->PatientDetailsTable->setColumnWidth(1, 50);
@@ -105,7 +105,7 @@ void admin::InitializeList()
         input >> name >> role >> role >> id;
 
         if (role != "patient") continue;
-
+        qDebug() << "second";
         AddPatientRecord(id);
     }
 }
@@ -168,7 +168,7 @@ void admin::on_Assign_clicked()
     QString doctorname = this->ui->DoctorName->text();
     QString nursename = this->ui->NurseName->text();
     //nurses.push_back(std::make_pair(doctorname,nursename));
-     QFile file("C:\\Users\\kouss\\Desktop\\Hospital Management System\\HMS_CSLab\\HMS\\Data\\nursesData.txt");
+     QFile file("C:\\AUC\\CS-Lab\\HMS\\Data\\nursesData.txt");
     if (file.open(QIODevice::ReadWrite | QIODevice::Append))
     {
          QTextStream stream(&file);
