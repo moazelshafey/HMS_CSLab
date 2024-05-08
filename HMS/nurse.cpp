@@ -2,7 +2,7 @@
 #include "ui_nurse.h"
 
 nurse::nurse(QWidget *parent, QList<QList<QString>>* usersRecords_ptr, QList<QString> data)
-    : QDialog(parent)
+    : QDialog(parent),file("Data/nursesData.txt")
     , ui(new Ui::nurse)
 {
     ui->setupUi(this);
@@ -12,6 +12,7 @@ nurse::nurse(QWidget *parent, QList<QList<QString>>* usersRecords_ptr, QList<QSt
     this->usersRecords_ptr = usersRecords_ptr;
     this->data = data;
     InitializeList();
+
 }
 
 nurse::~nurse()
@@ -21,6 +22,7 @@ nurse::~nurse()
 
 void nurse::InitializeList()
 {
+    qDebug()<<"Work?";
     ui->assignedpatients->setColumnCount(3);
     ui->assignedpatients->setColumnWidth(0, 150);
     ui->assignedpatients->setColumnWidth(1, 50);
@@ -35,7 +37,7 @@ void nurse::InitializeList()
     {
         QTextStream input(&data[i]);
         QString name, role, id;
-
+        qDebug()<<"Test";
         input >> name >> role >> role >> id;
 
         if (role != "patient") continue;
@@ -89,9 +91,8 @@ void nurse::AddPatientRecord(QString toBeAddedID)
     QString diagnosis = userRecords[2];
 
     QString name, id;
-
+    qDebug()<<toBeAddedID;
     userInfo >> name >> id;
-
     int index = ui->assignedpatients->rowCount();
     ui->assignedpatients->insertRow(index);
     ui->assignedpatients->setItem(index,0,new QTableWidgetItem(name));
@@ -102,7 +103,7 @@ void nurse::AddPatientRecord(QString toBeAddedID)
 
 void nurse::on_getdoctorbutton_clicked()
 {
-    QFile file("C:\\AUC\\CS-Lab\\HMS\\Data\\nursesData.txt");
+
     QString nursename = this->ui->nursename->text().trimmed(); // Trimmed to remove any leading/trailing spaces
 
     // Convert nurse's name to QByteArray

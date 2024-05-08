@@ -17,9 +17,12 @@ logIn::logIn(QWidget *parent)
     QPixmap b(":/Images/Login2.png");
     b = b.scaled(ui->BackgroundLabel->size());
     ui->BackgroundLabel->setPixmap(b);
+    QString executablePath = QCoreApplication::applicationDirPath();
 
-    loginInfoPath = "C:/AUC/CS-Lab/HMS/Data/loginData.txt";
-    userRecordsPath = "C:/AUC/CS-Lab/HMS/Data/usersData.txt";
+    // Construct the path relative to the executable
+    qDebug()<< executablePath ;
+    loginInfoPath ="Data/loginData.txt";
+    userRecordsPath ="Data/usersData.txt";
 
     ExtractData();
 }
@@ -34,17 +37,6 @@ void logIn::ExtractData()
         return;
     }
 
-
-    QTextStream stream(&file);
-
-    while (!stream.atEnd())
-    {
-        QString line = stream.readLine();
-        data.push_back(line);
-    }
-
-    file.close();
-
     QFile recordsFile(userRecordsPath);
 
     if (!recordsFile.open(QFile::ReadOnly))
@@ -53,26 +45,57 @@ void logIn::ExtractData()
         return;
     }
 
+
+    QTextStream stream(&file);
     QTextStream recordsStream(&recordsFile);
 
-    while (!recordsStream.atEnd())
+    while (!stream.atEnd())
     {
-        QString userInfo = recordsStream.readLine();
-        int recordsNumber;
-        recordsStream >> recordsNumber;
-        recordsStream.readLine();
-        QList<QString> userInfoAndRecords;
-        userInfoAndRecords.push_back(userInfo);
-        userInfoAndRecords.push_back(QString::number(recordsNumber));
-        for (int i = 0; i < recordsNumber; i++)
+        QString line = stream.readLine();
+        data.push_back(line);
+
+        QTextStream loginInfo(&line);
+        QString role;
+        loginInfo >> role >> role >> role;
+        if (role == "nurse" || role == "admin") continue;
+
+        if (role == "doctor")
         {
-            QString date = recordsStream.readLine();
-            QString reservee = recordsStream.readLine();
-            userInfoAndRecords.push_back(date);
-            userInfoAndRecords.push_back(reservee);
+            QString userInfo = recordsStream.readLine();
+            int recordsNumber;
+            recordsStream >> recordsNumber;
+            recordsStream.readLine();
+            QList<QString> userInfoAndRecords;
+            userInfoAndRecords.push_back(userInfo);
+            userInfoAndRecords.push_back(QString::number(recordsNumber));
+            for (int i = 0; i < recordsNumber; i++)
+            {
+                QString date = recordsStream.readLine();
+                QString reservee = recordsStream.readLine();
+                if (date != "") userInfoAndRecords.push_back(date);
+                if (reservee != "") userInfoAndRecords.push_back(reservee);
+            }
+            usersRecords.push_back(userInfoAndRecords);
         }
-        usersRecords.push_back(userInfoAndRecords);
+        else
+        {
+            QString userInfo = recordsStream.readLine();
+            int recordsNumber;
+            recordsStream >> recordsNumber;
+            recordsStream.readLine();
+            QList<QString> userInfoAndRecords;
+            userInfoAndRecords.push_back(userInfo);
+            userInfoAndRecords.push_back(QString::number(recordsNumber));
+            for (int i = 0; i < recordsNumber; i++)
+            {
+                QString diagnosis = recordsStream.readLine();
+                userInfoAndRecords.push_back(diagnosis);
+            }
+            usersRecords.push_back(userInfoAndRecords);
+        }
     }
+
+    file.close();
     recordsFile.close();
 }
 
